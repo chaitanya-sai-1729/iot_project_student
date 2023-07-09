@@ -60,7 +60,7 @@ function Login() {
         var len = 0;
         for (var i = 0; i < arr.length; i++) {
           if (arr[i]._id === input && arr[i].password === password) {
-            navigate('/home',{ state: { username: input } });
+            navigate('/front',{ state: { username: input } });
           }
           else if(arr[i]._id === input && arr[i].password != password){
 

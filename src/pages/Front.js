@@ -25,13 +25,15 @@ import {
   AlertDialogFooter,
   Button,
   Checkbox,
+  Card,
+  Stack
 } from "@chakra-ui/react";
 import { HiMenu } from "react-icons/hi";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const center = [12.9692, 79.1559];
 
-function Home() {
+function Front() {
   const navigate = useNavigate();
   const location = useLocation();
   const { username } = location.state;
@@ -113,7 +115,7 @@ function Home() {
   return (
     <ChakraProvider>
       <Flex direction="column" h="100vh">
-        <Flex bg="white" height="60px" p={4} align="center">
+        <Flex bg="white" height="60px" p={4} align="center" justify={"center"}>
           <Box
             w="40px"
             h="40px"
@@ -132,18 +134,17 @@ function Home() {
           </HStack>
         </Flex>
         <Box flex="1">
-          <MapContainer center={center} zoom={17} style={{ height: '100%', width: '100%' }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            {users.map((user) => (
-              <Marker
-                key={user._id}
-                position={[user.latitude, user.longitude]}
-                icon={["bus1", "bus2", "bus3"].includes(user._id) ? pinkIcon : blueIcon}
-              >
-                <Popup>{user._id}</Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+         <Box>
+         <Stack spacing={4} direction='column' align='center'> 
+
+          <Button colorScheme='teal' size='md' onClick={()=>navigate("/home",{ state: { username: username } })}>
+            Shuttle Tracking
+          </Button>
+          <Button colorScheme='teal' size='md'>
+            Due : {amount}
+          </Button>
+         </Stack>
+         </Box>
         </Box>
         <Flex bg="white" p={4} height="60px" align="center" justify="space-between">
           <Box>&copy; VIT. All Rights Reserved.</Box>
@@ -159,4 +160,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Front;
